@@ -1,4 +1,4 @@
-import  { Preset } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 export const shadcnPreset = {
   theme: {
@@ -16,7 +16,7 @@ export const shadcnPreset = {
       textColor: {
         foreground: "hsl(var(--foreground))",
       },
-      ringColor: {
+      ringColor: { 
         ring: "hsl(var(--ring))",
       },
       colors: {
@@ -32,5 +32,6 @@ export const shadcnPreset = {
       },
     },
   },
-} satisfies Preset;
+  content: []
+} satisfies Config;
 export default shadcnPreset;
