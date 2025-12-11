@@ -34,9 +34,17 @@ const propsData: Record<string, Array<{ prop: string; type: string; description:
     { prop: "closeDelay", type: "number", description: "Time in ms to wait before closing the hover card after unhover." },
     { prop: "onOpenChange", type: "(open: boolean) => void", description: "Callback when open state changes." },
     { prop: "children", type: "ReactNode", description: "Trigger and content slots (usually HoverCardTrigger + HoverCardContent)." }
+  ],
+  Tooltip: [
+    { prop: "open / defaultOpen", type: "boolean", description: "Controls whether the tooltip is open or closed by default. Used to control the external and default state " },
+    { prop: "onOpenChange", type: "(open: boolean) => void", description: "Callback when open state changes." },
+    { prop: "children", type: "ReactNode", description: "Trigger and content slots." }
   ]
-  
 };
+// children?: React.ReactNode;
+// open?: boolean;
+// defaultOpen?: boolean;
+// onOpenChange?: (open: boolean) => void;
 
 //  open?: boolean;
 // defaultOpen?: boolean;
@@ -97,7 +105,16 @@ const previewCode: Record<string, string> = {
           </div>
         </div>
       </HoverCardContent>
-    </HoverCard>`
+    </HoverCard>`,
+  Tooltip:`<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>Hover</TooltipTrigger>
+    <TooltipContent>
+      <p>Add to library</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+`
 };
 
 

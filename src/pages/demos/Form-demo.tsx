@@ -47,7 +47,7 @@ export default function FormDemo() {
             <div className="flex gap-2">
               <Button 
                 onClick={() => setShowProps(!showProps)} 
-                className="lg:hidden"
+                className="lg:hidden text-primary"
                 variant="outline"
               >
                 {showProps ? "Hide" : "Show"} Props
@@ -60,7 +60,7 @@ export default function FormDemo() {
 
           <div className="flex flex-col lg:flex-row gap-6">
             {/* LEFT PANEL: Live preview */}
-            <section className={`flex-1 ${showProps ? 'hidden lg:block' : 'block'}`}>
+            <section className="flex-1 space-y-6">
               <div className="space-y-6">
                 {/* Input */}
                 <Controller
@@ -103,7 +103,7 @@ export default function FormDemo() {
                       <Textarea 
                         {...field} 
                         placeholder="Type your message here..." 
-                        className="w-full min-h-[100px]"
+                        className="w-full min-h-[100px] bg-secondary"
                       />
                     </div>
                   )}
@@ -191,7 +191,7 @@ export default function FormDemo() {
 
                 {/* Select */}
                 <Controller
-                  control={form.control}
+                  control={ form.control }
                   name="select"
                   render={({ field }) => (
                     <div 
@@ -205,12 +205,12 @@ export default function FormDemo() {
                       </label>
                       <Select 
                         value={field.value}
-                        onValueChange={field.onChange}
+                        onValueChange={ field.onChange }
                       >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Choose a country" />
+                        <SelectTrigger className="w-full bg-secondary border-0">
+                          <SelectValue placeholder="Choose a country"/>
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-primary text-secondary border-0">
                           <SelectItem value="us">United States</SelectItem>
                           <SelectItem value="uk">United Kingdom</SelectItem>
                           <SelectItem value="ca">Canada</SelectItem>
@@ -220,7 +220,6 @@ export default function FormDemo() {
                     </div>
                   )}
                 />
-
                 {/* Calendar */}
                 <Controller
                   control={form.control}
@@ -228,7 +227,7 @@ export default function FormDemo() {
                   render={({ field }) => (
                     <div 
                       onClick={() => setSelected("Calendar")}
-                      className={`p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-800 border-2 transition-all cursor-pointer hover:shadow-xl ${
+                      className={`p-6 rounded-2xl shadow-lg dark:bg-gray-800 border-2 transition-all cursor-pointer hover:shadow-xl ${
                         selected === "Calendar" ? "border-blue-500" : "border-transparent"
                       }`}
                     >
@@ -239,7 +238,7 @@ export default function FormDemo() {
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        className="rounded-md border mx-auto"
+                        className="rounded-md border mx-auto text-primary"
                       />
                     </div>
                   )}
@@ -249,7 +248,6 @@ export default function FormDemo() {
                   Submit Form
                 </Button>
               </div>
-
               {/* Display current form values */}
               <div className="mt-6 p-6 rounded-2xl shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <h2 className="text-lg font-bold mb-3 text-gray-900 dark:text-gray-100">Current Form Values:</h2>

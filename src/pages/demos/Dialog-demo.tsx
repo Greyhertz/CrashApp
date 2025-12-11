@@ -24,6 +24,13 @@ import {
 import { Toaster, toast } from "sonner"; // Added Sonner
 import PropsPanel from "@/components/demos/dialog-panel";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { CalendarDays } from "lucide-react";
 
@@ -72,7 +79,7 @@ export default function DialogDemo()
     <main className="p-4 max-w-[1200px] mx-auto">
        {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Form Components Demo</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Dialog Components Demo</h1>
             <div className="flex gap-2">
               <Button 
                 onClick={() => setShowProps(!showProps)} 
@@ -202,7 +209,25 @@ export default function DialogDemo()
         </div>
       </HoverCardContent>
         </HoverCard>
-                </div>
+          </div>
+          
+          <div className="p-4 rounded-2xl shadow-md bg-white dark:bg-gray-800">
+          <h2 className="text-lg font-semibold mb-2">Tooltip</h2>
+          <Button onClick={() => setSelected("Tooltip")} className={ `shadow-lg   border-2 transition-all cursor-pointer hover:shadow-xl ${
+                selected === "Tooltip" ? "border-blue-500" : "border-transparent"
+              }`}>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>Hover</TooltipTrigger>
+                <TooltipContent>
+                  <p>Add to library</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+          </Button>
+          </div>
+      
         </section>
 
         {/* RIGHT PANEL: Props + explanation */}

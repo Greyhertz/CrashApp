@@ -16,6 +16,8 @@ import SidebarDemo from "./pages/demos/Sidebar-demo";
 import DialogDemo from "./pages/demos/Dialog-demo";
 import FormDemo from "./pages/demos/Form-demo";
 import DataDisplayDemo from "./pages/demos/Data-display-demo";
+import FragmentsDemo from "./pages/demos/Fragments-demo";
+import { Test } from "./pages/demos/test";
 export default function App() {
   return ( 
     <div>
@@ -27,6 +29,8 @@ export default function App() {
           <Route path="/demo/dialog" element={ <DialogDemo /> } />
           <Route path="/demo/form" element={ <FormDemo /> } />
           <Route path="/demo/data-display" element={ <DataDisplayDemo /> } />
+          <Route path="/demo/fragments" element={ <FragmentsDemo /> } />
+          <Route path="/demo/test" element={ <Test /> } />
         {/* <Route path="/" element={<Showcase />} />
         
         <Route path="/demo/inputs" element={<InputsDemo />} />

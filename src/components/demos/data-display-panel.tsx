@@ -9,7 +9,7 @@ type PropsPanelProps = {
 
 };
 
-const propsData = {
+const propsData: Record<string, Array<{ prop: string; type: string; description: string }>> = {
   cards: [
     { prop: "className", type: "string", description: "Additional CSS classes for styling the card container." },
     { prop: "children", type: "ReactNode", description: "Content to be rendered inside the card." }
@@ -62,13 +62,20 @@ const propsData = {
     { prop: "height", type: "number | string", description: "Chart height in pixels or percentage. Required for charts to render properly." },
     { prop: "margin", type: "object", description: "Spacing around chart: { top: 5, right: 30, left: 20, bottom: 5 }. Prevents labels from being cut off." }
   ],
+  calendar: [
+    { prop: "mode", type: "'single' | 'multiple' | 'range'", description: "Selection mode: 'single' for one date, 'multiple' for several dates, 'range' for start/end date selection." },
+    { prop: "selected", type: "Date | Date[] | DateRange", description: "Selected date(s). Type depends on mode: Date for single, Date[] for multiple, {from: Date, to: Date} for range." },
+    { prop: "onSelect", type: "(date) => void", description: "Called when user selects date(s). Parameter type matches the mode." },
+    { prop: "disabled", type: "Date[] | (date: Date) => boolean", description: "Array of disabled dates or function returning true for disabled dates. Useful for blocking past dates or specific days." },
+    { prop: "fromDate", type: "Date", description: "Earliest selectable date. Dates before this are disabled." },
+    { prop: "toDate", type: "Date", description: "Latest selectable date. Dates after this are disabled." }
+  ],
   pagination: [
     { prop: "currentPage", type: "number", description: "Currently active page number. Usually starts at 1." },
     { prop: "totalPages", type: "number", description: "Total number of pages available." },
     { prop: "onPageChange", type: "(page: number) => void", description: "Callback when user navigates to a different page. Receives new page number." },
     { prop: "disabled", type: "boolean", description: "Disables pagination controls when true. Useful during loading states." }
-  ],
- 
+  ]
 };
 
 const previewCode: Record<string, string> = {

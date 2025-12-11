@@ -17,6 +17,7 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { Calendar } from "@/components/ui/calendar";
 import PropsPanel from "@/components/demos/data-display-panel";
 import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -31,7 +32,7 @@ import {
   Tooltip as ReTooltip,
 } from "recharts";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const chartData = [
   { name: "Jan", value: 40 },
@@ -54,6 +55,108 @@ export default function DataDisplayDemo(): JSX.Element {
   const totalPages = 10;
 
   // preview code snippets for props panel
+  const previewCode: Record<string, string> = {
+    cards: `<Card>
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+  </CardHeader>
+  <CardContent>
+    Card body content
+  </CardContent>
+</Card>`,
+    table: `<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Email</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>John</TableCell>
+      <TableCell>john@mail.com</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`,
+    tabs: `<Tabs defaultValue="one">
+  <TabsList>
+    <TabsTrigger value="one">One</TabsTrigger>
+    <TabsTrigger value="two">Two</TabsTrigger>
+  </TabsList>
+  <TabsContent value="one">
+    Content for tab one
+  </TabsContent>
+  <TabsContent value="two">
+    Content for tab two
+  </TabsContent>
+</Tabs>`,
+    badges: `<Badge>New</Badge>
+<Badge variant="secondary">Beta</Badge>
+<Badge variant="destructive">Error</Badge>
+<Badge variant="outline">Draft</Badge>`,
+    progress: `<Progress value={60} max={100} />`,
+    slider: `const [value, setValue] = useState([50]);
+
+<Slider 
+  value={value}
+  onValueChange={setValue}
+  max={100}
+  step={1}
+/>
+<p>Value: {value[0]}</p>`,
+    carousel: `<Carousel>
+  <CarouselContent>
+    {items.map((item, i) => (
+      <CarouselItem key={i}>
+        <Card>{item}</Card>
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>`,
+    skeleton: `<Skeleton className="h-6 w-1/2" />
+<Skeleton className="h-4 w-1/3" />
+<Skeleton className="h-24 w-full" />`,
+    stats: `<Card>
+  <CardHeader>
+    <CardTitle>Total Sales</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p className="text-3xl font-bold">$12,400</p>
+    <Badge>+12%</Badge>
+  </CardContent>
+</Card>`,
+    charts: `import { LineChart, Line, XAxis, YAxis } from "recharts";
+
+<ResponsiveContainer width="100%" height={300}>
+  <LineChart data={data}>
+    <CartesianGrid strokeDasharray="3 3" />
+    <XAxis dataKey="name" />
+    <YAxis />
+    <Tooltip />
+    <Line type="monotone" dataKey="value" stroke="#7c3aed" />
+  </LineChart>
+</ResponsiveContainer>`,
+    pagination: `const [page, setPage] = useState(1);
+const totalPages = 10;
+
+<div className="flex items-center gap-4">
+  <Button 
+    onClick={() => setPage(p => Math.max(1, p - 1))}
+    disabled={page === 1}
+  >
+    Previous
+  </Button>
+  <span>Page {page} of {totalPages}</span>
+  <Button 
+    onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+    disabled={page === totalPages}
+  >
+    Next
+  </Button>
+</div>`,
+  };
 
   const toggleDark = () => {
     setDark((d) => {
@@ -307,6 +410,142 @@ export default function DataDisplayDemo(): JSX.Element {
 
               <Separator className="dark:bg-gray-800" />
 
+              {/* Progress Bar & Calendar */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div 
+                  onClick={() => handlePreviewClick("progress")} 
+                  className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg cursor-pointer hover:shadow-xl transition-shadow border-2 hover:border-blue-500"
+                >
+                  <h3 className="font-semibold mb-4">Progress Bars</h3>
+                  <div className="space-y-6">
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Project Completion</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">75%</span>
+                      </div>
+                      <Progress value={75} />
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Storage Used</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">45%</span>
+                      </div>
+                      <Progress value={45} />
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Loading...</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">30%</span>
+                      </div>
+                      <Progress value={30} />
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Almost Done</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">90%</span>
+                      </div>
+                      <Progress value={90} />
+                    </div>
+                  </div>
+                </div>
+
+                <div 
+                  onClick={() => handlePreviewClick("calendar")} 
+                  className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg cursor-pointer hover:shadow-xl transition-shadow border-2 hover:border-blue-500"
+                >
+                  <h3 className="font-semibold mb-4">Calendar / Date Picker</h3>
+                  <Calendar
+                    mode="single"
+                    selected={new Date()}
+                    onSelect={() => {}}
+                    className="rounded-md border mx-auto"
+                  />
+                </div>
+              </div>
+
+              <Separator className="dark:bg-gray-800" />
+
+              {/* Progress Bar & Calendar */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div 
+                  onClick={() => handlePreviewClick("progress")} 
+                  className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg cursor-pointer hover:shadow-xl transition-shadow border-2 hover:border-blue-500"
+                >
+                  <h3 className="font-semibold mb-4">Progress Bars</h3>
+                  <div className="space-y-6">
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Project Completion</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">75%</span>
+                      </div>
+                      <Progress value={75} />
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Storage Used</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">45%</span>
+                      </div>
+                      <Progress value={45} />
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Loading...</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">30%</span>
+                      </div>
+                      <Progress value={30} />
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-sm font-medium">Almost Done</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">90%</span>
+                      </div>
+                      <Progress value={90} />
+                    </div>
+                  </div>
+                </div>
+
+                <div 
+                  onClick={() => handlePreviewClick("hovercard")} 
+                  className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg cursor-pointer hover:shadow-xl transition-shadow border-2 hover:border-blue-500"
+                >
+                  <h3 className="font-semibold mb-4">Hover Card</h3>
+                  <div className="flex items-center gap-4">
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <Button variant="link" className="text-blue-600 dark:text-blue-400">
+                          @shadcn
+                        </Button>
+                      </HoverCardTrigger>
+                      <HoverCardContent className="w-80">
+                        <div className="flex justify-between space-x-4">
+                          <Avatar>
+                            <AvatarImage src="https://github.com/shadcn.png" />
+                            <AvatarFallback>SC</AvatarFallback>
+                          </Avatar>
+                          <div className="space-y-1">
+                            <h4 className="text-sm font-semibold">@shadcn</h4>
+                            <p className="text-sm">
+                              The React framework – created and maintained by @vercel.
+                            </p>
+                            <div className="flex items-center pt-2">
+                              <CalendarDays className="mr-2 h-4 w-4 opacity-70" />
+                              <span className="text-xs text-muted-foreground">
+                                Joined December 2021
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Hover over the username to see more details
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <Separator className="dark:bg-gray-800" />
+
               {/* Pagination / Skeleton / Badges */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div 
@@ -372,7 +611,7 @@ export default function DataDisplayDemo(): JSX.Element {
                   className="p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg cursor-pointer hover:shadow-xl transition-shadow border-2 hover:border-blue-500"
                 >
                   <h3 className="font-semibold mb-3">Skeletons (Loading States)</h3>
-                  <div className="space-y-3 animate-pulse animate">
+                  <div className="space-y-3">
                     <Skeleton className="h-6 w-3/4" />
                     <Skeleton className="h-4 w-1/2" />
                     <Skeleton className="h-24 w-full" />
@@ -398,10 +637,7 @@ export default function DataDisplayDemo(): JSX.Element {
                     <Badge className="bg-purple-500 hover:bg-purple-600">Premium</Badge>
                     <Badge className="bg-blue-500 hover:bg-blue-600">Info</Badge>
                   </div>
-
                 </div>
-  
-             
               </div>
             </section>
 

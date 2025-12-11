@@ -5,11 +5,12 @@ import { Card } from "@/components/ui/card"; // <--- replace w/ your shadcn Card
 
 const demos = [
   { name: "Buttons", path: "/demo/buttons", desc: "All button variants & states" },
-  { name: "Inputs", path: "/demo/inputs", desc: "Text fields, selects, etc." },
+  { name: "Test", path: "/demo/test", desc: "playground" },
   { name: "Dialog", path: "/demo/dialog", desc: "Modal / Alerts / Confirm" },
   { name: "Side", path: "/demo/sidebar", desc: "Sidebar with nested navigation" },
   { name: "Form", path: "/demo/form", desc: "" },
-  {name: "Data Display", path: "/demo/data-display", desc: "Tables, Cards, Carousels"}
+  { name: "Data Display", path: "/demo/data-display", desc: "Tables, Cards, Carousels" },
+  {name: "Fragments", path: "/demo/fragments", desc:""}
 ];
 
 export default function Showcase() {
